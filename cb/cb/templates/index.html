@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Chatbot Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202124; /* Dark background color */
+            color: #ffffff; /* Light text color */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden; /* Hide horizontal overflow */
+        }
+
+        /* Background image slider */
+        .background-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 2s ease-in-out; /* Smooth opacity transition */
+        }
+
+        .background-slider img.active {
+            opacity: 1; /* Show active image */
+        }
+
+        .notifications {
+            width: 100%;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            background: none; /* Removed background color */
+        }
+
+        .notifications ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            animation: scroll 20s linear infinite;
+        }
+
+        .notifications li {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .notifications li:last-child {
+            border-right: none;
+        }
+
+        .notifications .star-icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #ff5722; /* Orange */
+            color: #ffffff; /* White */
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .container, .info-section {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Dark box shadow */
+            margin-bottom: 30px; /* Added margin-bottom for spacing */
+            border: 1px solid #333; /* Dark border */
+            max-width: 80%; /* Adjusted to 80% for responsiveness */
+            width: 600px; /* Fixed width for larger screens */
+            overflow: hidden; /* Added to hide overflowing content */
+            transition: background 0.5s ease-in-out; /* Smooth background transition */
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: white; /* White heading color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for shine effect */
+            font-weight: bold; /* Bold font weight */
+        }
+
+        .explore-button {
+            background: #ff9800; /* Orange */
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: #ffffff; /* White */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .explore-button:hover {
+            background: #f57c00; /* Darker shade of orange on hover */
+        }
+
+        .info-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: white; /* White heading color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for shine effect */
+            font-weight: bold; /* Bold font weight */
+        }
+
+        .info-section img {
+            max-width: 100%; /* Adjusted for responsive images */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light shadow */
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            font-size: 1.2em;
+            color: white; /* White text color */
+            font-weight: bold; /* Bold font weight */
+        }
+    </style>
+</head>
+<body>
+    <div class="background-slider">
+        <img class="active" src="{{ url_for('static', filename='home3.jpeg') }}" alt="Background Image 1">
+        <img src="{{ url_for('static', filename='home2.jpeg') }}" alt="Background Image 2">
+        <img src="{{ url_for('static', filename='home1.jpeg') }}" alt="Background Image 3">
+    </div>
+    <div class="notifications">
+        <ul>
+            <li><div class="star-icon">NEW</div>Class schedule updated.</li>
+            <li><div class="star-icon">NEW</div>New event on campus.</li>
+            <li><div class="star-icon">NEW</div>Exam results released.</li>
+            <li><div class="star-icon">NEW</div>Library hours extended.</li>
+            <li><div class="star-icon">NEW</div>Class schedule updated.</li>
+            <li><div class="star-icon">NEW</div>New event on campus.</li>
+            <li><div class="star-icon">NEW</div>Exam results released.</li>
+            <li><div class="star-icon">NEW</div>Library hours extended.</li>
+        </ul>
+    </div>
+    <div class="info-section">
+        <h2>Malnad College of Engineering</h2>
+        <img src="{{ url_for('static', filename='homel1.jpeg') }}" alt="Malnad College of Engineering">
+        <p>Malnad College of Engineering (MCE) is an autonomous engineering college located in Hassan, Karnataka, India. It offers a wide range of engineering courses and is known for its excellent faculty, state-of-the-art facilities, and vibrant campus life.</p>
+    </div>
+
+    <div class="container">
+        <h1>Welcome to College Chatbot</h1>
+        <p><a class="explore-button" href="{{ url_for('login') }}">Login</a> or <a class="explore-button" href="{{ url_for('register') }}">Register</a> to continue.</p>
+    </div>
+   
+    <script>
+        // Background image slider script
+        const images = document.querySelectorAll('.background-slider img');
+        let currentImageIndex = 0;
+
+        setInterval(() => {
+            images[currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images[currentImageIndex].classList.add('active');
+        }, 5000); // Change image every 5 seconds
+    </script>
+</body>
+</html>
